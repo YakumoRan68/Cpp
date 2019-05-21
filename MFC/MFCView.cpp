@@ -58,12 +58,42 @@ void CMFCView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 
-	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
+	/*
 	pDC->TextOut(100, 100, _T("Hello PC"), 6);
 	pDC->MoveTo(100, 100);
 	pDC->LineTo(200, 230);
 	pDC->Rectangle(100, 100, 300, 400);
-	pDC->Ellipse(100, 100, 300, 300); //x, y지점에서 x2, y2를 채운 직사각형 안에서 원을 그림
+	pDC->Ellipse(100, 100, 300, 300); //x, y지점에서 x2, y2를 채운 직사각형 안에서 원을 그림 */
+
+	CPen pen; // 펜 타입 펜생성
+	pen.CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+	CPen *Pen = pDC->SelectObject(&pen);
+	pDC->MoveTo(100, 100);
+	pDC->LineTo(200, 230);
+
+	CBrush brush(RGB(0, 255, 255)); //브러시(내부를 채움)
+	CBrush *Brush = pDC->SelectObject(&brush);
+
+	pDC->Rectangle(100, 100, 300, 400);
+}
+
+void CMFCView::OnLButtonDown(UINT nFlags, CPoint point) {
+	//MessageBox(_T("마우스 클릭"), _T("마우스 메세지"));
+	CClientDC dc(this);
+	dc.TextOut(200, 100, _T("Hello PC"), 6); //영역이 무효화 되면(다른창으로 가리는 등) 클릭하기 전까진 지워진다.
+
+	CView::OnLButtonDown(nFlags, point);
+
+	CPen pen; // 펜 타입 펜생성
+	pen.CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+	CPen *Pen = dc.SelectObject(&pen);
+	dc.MoveTo(100, 100);
+	dc.LineTo(200, 230);
+
+	CBrush brush(RGB(0, 255, 255)); //브러시(내부를 채움)
+	CBrush *Brush = dc.SelectObject(&brush);
+
+	dc.Rectangle(100, 100, 300, 400);
 }
 
 
@@ -105,15 +135,3 @@ CMFCDoc* CMFCView::GetDocument() const // 디버그되지 않은 버전은 인라인으로 지정
 	return (CMFCDoc*)m_pDocument;
 }
 #endif //_DEBUG
-
-
-// CMFCView 메시지 처리기
-
-
-void CMFCView::OnLButtonDown(UINT nFlags, CPoint point) {
-	//MessageBox(_T("마우스 클릭"), _T("마우스 메세지"));
-	CClientDC dc(this);
-	dc.TextOut(200, 100, _T("Hello PC"), 6); //영역이 무효화 되면(다른창으로 가리는 등) 클릭하기 전까진 지워진다.
-
-	CView::OnLButtonDown(nFlags, point);
-}
