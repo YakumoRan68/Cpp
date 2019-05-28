@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "atltypes.h"
 
 
 class CMFCView : public CView
@@ -38,10 +39,21 @@ public:
 protected:
 
 // 생성된 메시지 맵 함수
+public:
+	CRect rt;
+
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	CString m_str;
+	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+	CPoint p1;
+	CPoint p2;
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+//	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	CPoint p3;
 };
 
 #ifndef _DEBUG  // MFCView.cpp의 디버그 버전
