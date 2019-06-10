@@ -40,7 +40,7 @@ void main() {
 	cout << endl;
 
 	Car *c2 = new Car();
-	c1->view();
+	c2->view();
 
 	cout << endl;
 

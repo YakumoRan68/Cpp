@@ -29,5 +29,5 @@ void main() {
 	calc(num, intnum);
 
 	Car a;
-	a.c(10);
+	a.c(10.5);
 }

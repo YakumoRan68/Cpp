@@ -16,7 +16,7 @@ void main() {
 
 	cout << endl;
 
-	std::for_each(scores.begin(), scores.end(), [](int &n) {cout << n << endl; n++; }); //람다식을 이용한 출력 (algorithm.h 필요)
+	for_each(scores.begin(), scores.end(), [](int &n) {cout << n << endl; n++; }); //람다식을 이용한 출력 (algorithm.h 필요)
 
 	cout << endl;
 
