@@ -5,7 +5,9 @@
 #pragma once
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
-#define RADIUS 10
+#define RADIUS 30
+#define NUMBALL 10
+#define AREA 500
 
 class CMFCApplication1View : public CView
 {
@@ -17,12 +19,21 @@ protected: // serialization에서만 만들어집니다.
 public:
 	CMFCApplication1Doc* GetDocument() const;
 	int IsPushed;
+	int Score;
 
 	CPoint m_Point;
 	int VectorX = 5;
 	int VectorY = 5;
 
 	CRect WRect;
+
+	CPoint BPoint[NUMBALL];
+	int BSize[NUMBALL];
+	int BVectX[NUMBALL];
+	int BVectY[NUMBALL];
+	int IsAlive[NUMBALL];
+
+
 	//UINT_PTR TnIDEvent;
 
 // 작업입니다.
@@ -56,6 +67,7 @@ public:
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	virtual void OnInitialUpdate();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // MFCApplication1View.cpp의 디버그 버전
