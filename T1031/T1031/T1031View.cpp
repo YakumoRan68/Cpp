@@ -30,6 +30,7 @@ BEGIN_MESSAGE_MAP(CT1031View, CView)
 //	ON_WM_LBUTTONDBLCLK()
 ON_WM_LBUTTONDOWN()
 ON_WM_MOUSEMOVE()
+ON_WM_CHAR()
 END_MESSAGE_MAP()
 
 
@@ -60,8 +61,19 @@ void CT1031View::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 
-	pDC->Rectangle(m_pointStart.x, m_pointStart.y, m_pointEnd.x, m_pointEnd.y);
+	CPen pen, *oldPen;
+	CBrush brush, *oldBrush;
 
+	brush.CreateSolidBrush(RGB(255, 0, 0));
+	//brush.CreateHatchBrush(3, RGB(255,0,0));
+	oldBrush = pDC->SelectObject(&brush);
+	pen.CreatePen(PS_SOLID, 3, m_PenColor);
+	oldPen = pDC->SelectObject(&pen);
+	//pDC->SelectObject(&pen);
+	pDC->TextOutA(10, 10, color);
+
+	//pDC->Rectangle(m_pointStart.x, m_pointStart.y, m_pointEnd.x, m_pointEnd.y);
+	pDC->Polygon(PolyPoint, PolyCount);
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
 
@@ -108,7 +120,6 @@ CT1031Doc* CT1031View::GetDocument() const // 디버그되지 않은 버전은 인라인으로 
 
 // CT1031View 메시지 처리기
 
-
 void CT1031View::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	m_pointEnd = point;
@@ -122,6 +133,7 @@ void CT1031View::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	m_pointStart = point;
 	isClicked = true;
+	PolyPoint[GetPolyCount()] = point;
 
 	CView::OnLButtonDown(nFlags, point);
 }
@@ -129,10 +141,10 @@ void CT1031View::OnLButtonDown(UINT nFlags, CPoint point)
 
 void CT1031View::OnMouseMove(UINT nFlags, CPoint point)
 {
-	if (isClicked) {
+	//if (isClicked) {
 		m_pointEnd = point;
 		Invalidate();
-	}
+	//}
 
 	CView::OnMouseMove(nFlags, point);
 }
@@ -140,7 +152,19 @@ void CT1031View::OnMouseMove(UINT nFlags, CPoint point)
 
 void CT1031View::OnInitialUpdate()
 {
+	m_PenColor = RGB(0, 0, 0);
 	CView::OnInitialUpdate();
+}
 
+void CT1031View::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	switch (nChar) {
+		case 'r' : m_PenColor = RGB(255, 0, 0); color = "Red"; break;
+		case 'g' : m_PenColor = RGB(0, 255, 0); color = "Green"; break;
+		case 'b' : m_PenColor = RGB(0, 0, 255); color = "Blue"; break;
+	}
+	Invalidate();
 
+	CView::OnChar(nChar, nRepCnt, nFlags);
 }

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#define POLYMAX 6
 
 class CT1031View : public CView
 {
@@ -19,7 +20,18 @@ public:
 public:
 	CPoint m_pointStart;
 	CPoint m_pointEnd;
+	CString color = "Black";
+	COLORREF m_PenColor;
+	POINT PolyPoint[POLYMAX];
+	int PolyCount = 0;
+	int GetPolyCount() {
+		if (PolyCount >= POLYMAX) PolyCount = 0;
+		return PolyCount++;
+	}
+	HDC HText;
+
 	bool isClicked = false;
+
 // 재정의입니다.
 public:
 	virtual void OnDraw(CDC* pDC);  // 이 뷰를 그리기 위해 재정의되었습니다.
@@ -48,6 +60,7 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	virtual void OnInitialUpdate();
+	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
 #ifndef _DEBUG  // T1031View.cpp의 디버그 버전
