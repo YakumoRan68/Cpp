@@ -29,7 +29,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -186,6 +186,7 @@
     <ClInclude Include="1114View.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Splash.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -194,6 +195,7 @@
     <ClCompile Include="1114Doc.cpp" />
     <ClCompile Include="1114View.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Splash.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -208,11 +210,19 @@
     <None Include="res\My1114.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="boom.bmp" />
+    <Image Include="LAND2.BMP" />
     <Image Include="res\1114.ico" />
     <Image Include="res\1114Doc.ico" />
     <Image Include="res\Toolbar.bmp" />
+    <Image Include="splash.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="1114.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include "1114.h"
 #include "MainFrm.h"
+#include "Splash.h"
 
 #include "1114Doc.h"
 #include "1114View.h"
@@ -69,7 +70,10 @@ BOOL CMy1114App::InitInstance()
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinAppEx::InitInstance();
-
+	CSplash spl(TEXT("splash.bmp"), RGB(255, 255, 255));
+	spl.ShowSplash();
+	Sleep(3000);
+	spl.CloseSplash();
 
 	// OLE 라이브러리를 초기화합니다.
 	if (!AfxOleInit())

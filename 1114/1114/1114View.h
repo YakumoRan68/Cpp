@@ -14,6 +14,10 @@ protected: // serialization에서만 만들어집니다.
 // 특성입니다.
 public:
 	CMy1114Doc* GetDocument() const;
+	CPoint m_pointCurrent;
+	int m_BoomCount; //현재 출력중인 폭탄 이미지
+
+
 
 // 작업입니다.
 public:
@@ -40,6 +44,12 @@ protected:
 // 생성된 메시지 맵 함수
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	virtual void OnInitialUpdate();
 };
 
 #ifndef _DEBUG  // 1114View.cpp의 디버그 버전
