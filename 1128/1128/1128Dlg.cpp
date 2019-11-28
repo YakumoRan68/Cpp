@@ -54,6 +54,7 @@ CMy1128Dlg::CMy1128Dlg(CWnd* pParent /*=NULL*/)
 	, m_strEditTest(_T(""))
 	, m_strEditTest2(_T(""))
 	, m_strEditTest3(_T(""))
+	, m_strEditCombo(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -64,6 +65,9 @@ void CMy1128Dlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT1, m_strEditTest);
 	DDX_Text(pDX, IDC_EDIT2, m_strEditTest2);
 	DDX_Text(pDX, IDC_EDIT3, m_strEditTest3);
+	DDX_Text(pDX, IDC_EDIT_COMBO, m_strEditCombo);
+	DDX_Control(pDX, IDC_COMBOTEST, m_ComboTest);
+	DDX_Control(pDX, IDC_ProgressTest, m_ProgTest);
 }
 
 BEGIN_MESSAGE_MAP(CMy1128Dlg, CDialogEx)
@@ -74,6 +78,8 @@ BEGIN_MESSAGE_MAP(CMy1128Dlg, CDialogEx)
 	ON_EN_CHANGE(IDC_EDIT1, &CMy1128Dlg::OnEnChangeEdit1)
 	ON_COMMAND(IDD_MY1128_DIALOG, &CMy1128Dlg::UpdateText)
 	ON_EN_CHANGE(IDC_EDIT2, &CMy1128Dlg::OnEnChangeEdit2)
+	ON_CBN_SELCHANGE(IDC_COMBOTEST, &CMy1128Dlg::OnCbnSelchangeCombotest)
+	ON_BN_CLICKED(ADD_ITEM_BUTTON, &CMy1128Dlg::OnBnClickedItemButton)
 END_MESSAGE_MAP()
 
 
@@ -108,7 +114,10 @@ BOOL CMy1128Dlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 큰 아이콘을 설정합니다.
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
-	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+	m_ComboTest.AddString(L"1번 아이템");
+	m_ComboTest.AddString(L"2번 아이템");
+	m_ComboTest.AddString(L"3번 아이템");
+	m_ProgTest.SetRange(0, 100);
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
@@ -172,6 +181,7 @@ void CMy1128Dlg::UpdateText()
 void CMy1128Dlg::OnBnClickedButton1()
 {
 	UpdateText();
+	m_ProgTest.SetPos(m_ProgTest.GetPos() + 1);
 }
 
 
@@ -184,4 +194,28 @@ void CMy1128Dlg::OnEnChangeEdit1()
 void CMy1128Dlg::OnEnChangeEdit2()
 {
 	UpdateText();
+}
+
+
+void CMy1128Dlg::OnCbnSelchangeCombotest()
+{
+	UpdateData(TRUE);
+	m_ComboTest.GetLBText(m_ComboTest.GetCurSel(), m_strEditCombo);
+	UpdateData(FALSE);
+}
+
+
+void CMy1128Dlg::OnBnClickedItemButton()
+{
+	if (m_ComboTest.FindStringExact(-1, (LPCTSTR)m_strEditCombo) != CB_ERR) {
+		MessageBox(L"중복");
+		m_strEditCombo = "중복";
+	}
+	else {
+		UpdateData(TRUE);
+		m_ComboTest.AddString(m_strEditCombo);
+		UpdateData(FALSE);
+	}
+
+	
 }

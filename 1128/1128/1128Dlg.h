@@ -3,6 +3,8 @@
 //
 
 #pragma once
+#include "afxwin.h"
+#include "afxcmn.h"
 
 
 // CMy1128Dlg 대화 상자
@@ -39,4 +41,9 @@ public:
 	afx_msg void OnEnChangeEdit1();
 	afx_msg void UpdateText();
 	afx_msg void OnEnChangeEdit2();
+	CString m_strEditCombo;
+	CComboBox m_ComboTest;
+	afx_msg void OnCbnSelchangeCombotest();
+	afx_msg void OnBnClickedItemButton();
+	CProgressCtrl m_ProgTest;
 };
