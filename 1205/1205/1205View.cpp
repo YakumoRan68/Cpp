@@ -26,6 +26,8 @@ BEGIN_MESSAGE_MAP(CMy1205View, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_KEYDOWN()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 // CMy1205View 생성/소멸
@@ -50,7 +52,7 @@ BOOL CMy1205View::PreCreateWindow(CREATESTRUCT& cs)
 
 // CMy1205View 그리기
 
-void CMy1205View::OnDraw(CDC* /*pDC*/)
+void CMy1205View::OnDraw(CDC* pDC)
 {
 	CMy1205Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -102,3 +104,41 @@ CMy1205Doc* CMy1205View::GetDocument() const // 디버그되지 않은 버전은 인라인으�
 
 
 // CMy1205View 메시지 처리기
+
+
+void CMy1205View::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	switch (nChar) {
+	case VK_LEFT:
+		bar.MoveTo(LEFT);
+		break;
+	case VK_RIGHT:
+		bar.MoveTo(RIGHT);
+		break;
+	}
+
+	CView::OnKeyDown(nChar, nRepCnt, nFlags);
+}
+
+
+void CMy1205View::OnTimer(UINT_PTR nIDEvent)
+{
+	ball.OnTick();
+	
+	CRect BallBox = ball.GetHitBox();
+	CPoint BallP1 = BallBox.TopLeft();
+	CPoint BallP2 = BallBox.BottomRight();
+
+	short flag = 0;
+
+	if (BallP1.x < MAP_LEFT || BallP2.x > MAP_RIGHT) {
+		flag = flag | 2;
+	}
+
+	if (BallP1.y < MAP_TOP) {
+		flag = flag | 1;
+	}
+
+
+	CView::OnTimer(nIDEvent);
+}

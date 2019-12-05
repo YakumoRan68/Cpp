@@ -7,7 +7,9 @@ Bar::Bar() {
 	SetColor(0, 250, 30);	
 }
 
-Bar::~Bar() {}
+Bar::~Bar() {
+	
+}
 
 void Bar::MoveTo(bool dir) {
 	center.x += -STEP + STEP * 2 * dir;

@@ -3,7 +3,16 @@
 //
 
 #pragma once
+#include "Object.h"
+#include "Ball.h"
+#include "Bar.h"
+#include "GameRule.h"
 
+#define MAP_LEFT 0
+#define MAP_RIGHT 500
+#define MAP_TOP 0
+#define MAP_BOTTOM 300
+#define MAX_LIVES 3
 
 class CMy1205View : public CView
 {
@@ -15,9 +24,9 @@ protected: // serialization에서만 만들어집니다.
 public:
 	CMy1205Doc* GetDocument() const;
 	
-	CPoint BallCenter;
-	
-
+	Ball ball;
+	Bar bar; //is you
+	int lives = MAX_LIVES;
 
 
 // 작업입니다.
@@ -45,6 +54,9 @@ protected:
 // 생성된 메시지 맵 함수
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 #ifndef _DEBUG  // 1205View.cpp의 디버그 버전
