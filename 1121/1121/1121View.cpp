@@ -54,7 +54,7 @@ BOOL CMy1121View::PreCreateWindow(CREATESTRUCT& cs)
 // CMy1121View ±×¸®±â
 
 void CMy1121View::OnDraw(CDC* pDC)
-{s
+{
 	CMy1121Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)

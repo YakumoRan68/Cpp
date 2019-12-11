@@ -1,15 +1,15 @@
 #pragma once
-#define RADIUS 7;
 
 class Ball : public Object
 {
 public:
 	Ball();
 	~Ball();
-	int radius = RADIUS;
+	int radius;
 	int VectX, VectY;
 
-	CRect GetHitBox();
+	void InitPosition();
 	void OnCollide(short flag);
 	void OnTick();
+	void OnStopTick();
 };

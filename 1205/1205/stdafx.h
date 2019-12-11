@@ -5,10 +5,32 @@
 
 #pragma once
 
+#define MAP_LEFT 0
+#define MAP_RIGHT 500
+#define MAP_TOP 0
+#define MAP_BOTTOM 300
+
+#define MAX_LIVES 3
+
+#define BAR_WIDTH 100
+#define BAR_HEIGHT 15
+
+#define BRICK_WIDTH 60
+#define BRICK_HEIGHT 20
+
+#define BALL_RADIUS 7;
+#define BALL_SPEED 2
+
+#define BRICKS_ROW 5
+#define BRICKS_COL 6
+#define NUM_BRICKS BRICKS_ROW * BRICKS_COL
+
+
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
 #endif
 
+#include <time.h>
 #include "targetver.h"
 
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // 일부 CString 생성자는 명시적으로 선언됩니다.

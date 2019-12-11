@@ -186,6 +186,7 @@
     <ClInclude Include="1205View.h" />
     <ClInclude Include="ball.h" />
     <ClInclude Include="Bar.h" />
+    <ClInclude Include="brick.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Resource.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="1205Doc.cpp" />
     <ClCompile Include="1205View.cpp" />
     <ClCompile Include="Bar.cpp" />
+    <ClCompile Include="Brick.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -214,8 +216,12 @@
     <None Include="res\My1205.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="brick1.bmp" />
+    <Image Include="brick2.bmp" />
+    <Image Include="brick3.bmp" />
     <Image Include="res\1205.ico" />
     <Image Include="res\1205Doc.ico" />
+    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

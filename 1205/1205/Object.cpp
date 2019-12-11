@@ -6,7 +6,13 @@ Object::Object() {
 	SetColor(0,0,0);
 }
 
-Object::~Object() {}
+Object::~Object() {
+	delete HitBox;
+}
+
+CRect* Object::GetHitBox() {
+	return HitBox;
+}
 
 void Object::SetColor(int r, int g, int b) {
 	color = RGB(r,g,b);

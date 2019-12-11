@@ -4,23 +4,31 @@
 #include "MainFrm.h"
 
 Ball::Ball() {
-	center.SetPoint(250, 50);
-	VectX = 5;
-	VectY = 5;
+	radius = BALL_RADIUS;
+	InitPosition();
+	HitBox = new CRect(center.x - radius, center.y - radius, center.x + radius, center.y + radius);
 }
 
 Ball::~Ball() {}
 
-CRect Ball::GetHitBox() {
-	return CRect(center.x - radius, center.y - radius, center.x + radius, center.y + radius);
+void Ball::InitPosition() {
+	center.SetPoint((MAP_RIGHT - MAP_LEFT) / 2, MAP_BOTTOM - 100);
+	VectX = BALL_SPEED;
+	VectY = -BALL_SPEED;
 }
 
 void Ball::OnCollide(short flag) {
-	VectY *= pow(-1, flag % 2);
-	VectX *= pow(-1, flag / 2);
+	VectY *= (int)pow(-1, flag % 2);
+	VectX *= (int)pow(-1, flag / 2);
+}
+
+void Ball::OnStopTick() {
+	VectX = 0;
+	VectY = 0;
 }
 
 void Ball::OnTick() {
 	center.x += VectX;
 	center.y += VectY;
+	HitBox->MoveToXY(center);
 }

@@ -124,11 +124,11 @@ BOOL CMy1121App::InitInstance()
 	m_pMainWnd->UpdateWindow();
 
 	GdiplusStartupInput GdiplusStartupInput;
-	if (::GdiplusStartup(&gdiplusToken, &GdiplusStartupInput, NULL) != Ok)
-	{
-		AfxMessageBox(_T("Error : Failed to initialize GDI+ library!"));
-		return FALSE;
-	}
+	//if (::GdiplusStartup(&gdiplusToken, &GdiplusStartupInput, NULL) != Ok)
+	//{
+		//AfxMessageBox(_T("Error : Failed to initialize GDI+ library!"));
+		//return FALSE;
+	//}
 	return TRUE;
 }
 

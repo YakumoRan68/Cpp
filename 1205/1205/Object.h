@@ -7,6 +7,8 @@ public:
 
 	COLORREF color;
 	CPoint center;
-	virtual CRect GetHitBox() = 0;
+	CRect* HitBox;
+
+	CRect* GetHitBox();
 	void SetColor(int r, int g, int b);
 };
